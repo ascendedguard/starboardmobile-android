@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" android:background="#DDDDDD">
+    <Button android:layout_width="match_parent" android:onClick="updatePlayer1" android:layout_height="wrap_content" android:text="Update Player 1" android:id="@+id/btnUpdatePlayer1" android:layout_marginTop="10px"></Button>
+    <Button android:layout_width="match_parent" android:onClick="updatePlayer2" android:layout_height="wrap_content" android:text="Update Player 2" android:id="@+id/btnUpdatePlayer2"></Button>
+    <Button android:layout_width="match_parent" android:onClick="toggleSubbar" android:layout_height="wrap_content" android:text="Toggle Subbar" android:id="@+id/btnToggleSubbar"></Button>
+    <Button android:layout_width="match_parent" android:onClick="toggleAnnouncement" android:layout_height="wrap_content" android:text="Toggle Announcement" android:id="@+id/btnToggleAnnouncement"></Button>    
+    <Button android:layout_width="match_parent" android:onClick="swapPlayer" android:layout_height="wrap_content" android:text="Swap Players" android:id="@+id/btnSwapPlayers"></Button>
+    <Button android:layout_width="match_parent" android:onClick="showScoreboard" android:layout_height="wrap_content" android:text="Show Scoreboard" android:id="@+id/btnShowScoreboard"></Button>
+</LinearLayout>

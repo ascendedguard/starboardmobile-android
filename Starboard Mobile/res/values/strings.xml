@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Starboard Remote</string>
+    <string-array name="race_array">
+        <item>Unknown</item>
+    	<item>Terran</item>
+    	<item>Zerg</item>
+    	<item>Protoss</item>
+    	<item>Random</item>
+    </string-array>
+    <string-array name="color_array">
+    	<item>None</item>
+    	<item>Red</item>
+    	<item>Blue</item>
+    	<item>Teal</item>
+    	<item>Purple</item>
+    	<item>Yellow</item>
+    	<item>Orange</item>
+    	<item>Green</item>
+    	<item>Light Pink</item>
+    </string-array>
+</resources>
