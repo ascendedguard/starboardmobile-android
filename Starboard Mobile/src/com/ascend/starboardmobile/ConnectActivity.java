@@ -17,7 +17,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 
-public class MetagameActivity extends Activity {
+public class ConnectActivity extends Activity {
    
 	private EditText tvIPAddress;
 	private EditText tvPort;

@@ -71,6 +71,166 @@ public class PlayerEditActivity extends Activity {
         
         TextView tv = (TextView) findViewById(R.id.txtPlayerLabel);
         tv.setText("Player " + player);
+        
+    	DatagramSocket s;
+    	try {
+			s = new DatagramSocket(serverPort);
+		} catch (SocketException e) {
+			e.printStackTrace();
+			return;
+		}    	
+    	
+    	byte[] bytes = new byte[] { 0x30, 1, 0, (byte)0x40, (byte)this.player };
+
+    	DatagramPacket p = new DatagramPacket(bytes, bytes.length, serverPath, serverPort);
+
+    	// Wait 1 second for timeout.
+    	try {
+			s.setSoTimeout(3000);
+	    	s.send(p);
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+    	byte[] buffer = new byte[500];
+    	DatagramPacket response = new DatagramPacket(buffer, buffer.length); 
+    	
+    	try
+    	{
+    		s.receive(response);
+    	}
+    	catch (IOException ex)
+    	{
+    		s.close();
+    		return;
+    	}
+    	
+    	ParsePlayerUpdateResponse(buffer);
+    	
+    	s.close();
+    }
+  
+    private void ParsePlayerUpdateResponse(byte[] buffer)
+    {
+    	// 0x00 = Magic Number: 0x30
+    	byte numCommands = buffer[1];
+    	
+    	int offset = 2; // starting offset
+    	
+    	for(int i = 0; i < numCommands; i++)
+    	{
+    		byte cmd = buffer[offset++]; // Command type
+    		
+    		if (cmd == 0x00) // EmptyCommand
+    		{
+    			offset = ParseEmptyCommand(buffer, offset);
+    		}
+    		else if (cmd == 0x01) // StringCommand
+    		{
+    			offset = ParseStringCommand(buffer, offset);
+    		}
+    		else if (cmd == 0x02) // Int32Command
+    		{
+    			offset = ParseInt32Command(buffer, offset);
+    		}
+    		else if (cmd == 0x03) // ByteCommand
+    		{
+    			offset = ParseByteCommand(buffer, offset);
+    		}
+    	}
+    }
+    
+    /* returns the new offset */
+    private int ParseEmptyCommand(byte[] buffer, int offset)
+    {
+    	byte cmd = buffer[offset++];
+    	byte player = buffer[offset++];
+    	
+    	// No empty commands are expected to be parsed.
+    	
+    	return offset;
+    }
+    
+    /* returns the new offset */
+    private int ParseStringCommand(byte[] buffer, int offset)
+    {
+    	byte cmd = buffer[offset++];
+    	byte player = buffer[offset++];
+    	int length = byteArrayToInt(buffer, offset);
+    	
+    	offset += 4;
+    	
+    	byte[] str = new byte[length];
+    	
+    	for(int i = 0; i < length; i++)
+    	{
+    		str[i] = buffer[offset++];
+    	}
+    	
+    	String s;
+		try {
+			s = new String(str, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return offset;
+		}
+    	
+    	// Handle any expected StringCommands here.
+    	
+    	if (cmd == 0x01) // UpdatePlayerName
+    	{
+    		txtPlayerName.setText(s);
+    	}
+    	
+    	return offset;
+    }
+    
+    private int ParseInt32Command(byte[] buffer, int offset)
+    {
+    	byte cmd = buffer[offset++];
+    	byte player = buffer[offset++];
+    	int data = byteArrayToInt(buffer, offset);
+    	String score = Integer.toString(data);
+    	offset += 4;
+    	
+    	if (cmd == 0x02) // UpdateScore
+    	{
+    		txtScore.setText(score);
+    	}
+    	
+    	return offset;
+    }
+    
+    private int ParseByteCommand(byte[] buffer, int offset)
+    {
+    	byte cmd = buffer[offset++];
+    	byte player = buffer[offset++];
+    	byte data = buffer[offset++];
+    	
+    	if (cmd == 0x03) // UpdateRace
+    	{
+    		raceSpinner.setSelection(data);
+    	}
+    	else if (cmd == 0x04) // UpdateColor
+    	{
+    		colorSpinner.setSelection(data);
+    	}
+    	
+    	return offset;
+    }
+    
+    public static int byteArrayToInt(byte[] b, int offset) {
+        int value = 0;
+        for (int i = 0; i < 4; i++) {
+            int shift = (i) * 8;
+            value += (b[i + offset] & 0x000000FF) << shift;
+        }
+        return value;
     }
     
     public void updatePlayer(View v) throws IOException {

@@ -120,6 +120,48 @@ public class MainControlsActivity extends Activity {
     	s.close();
     }
     
+    public void incrementPlayer1(View v) throws IOException
+    {
+    	DatagramSocket s;
+    	try {
+			s = new DatagramSocket(serverPort);
+		} catch (SocketException e) {
+			e.printStackTrace();
+			return;
+		}    	
+    	
+    	byte[] bytes = new byte[] { 0x30, 1, 0, (byte)0x30, 1 };
+
+    	DatagramPacket p = new DatagramPacket(bytes, bytes.length, serverPath, serverPort);
+
+    	// Wait 1 second for timeout.
+    	s.setSoTimeout(3000);
+
+    	s.send(p);
+    	s.close();
+    }
+    
+    public void incrementPlayer2(View v) throws IOException
+    {
+    	DatagramSocket s;
+    	try {
+			s = new DatagramSocket(serverPort);
+		} catch (SocketException e) {
+			e.printStackTrace();
+			return;
+		}    	
+    	
+    	byte[] bytes = new byte[] { 0x30, 1, 0, (byte)0x30, 2 };
+
+    	DatagramPacket p = new DatagramPacket(bytes, bytes.length, serverPath, serverPort);
+
+    	// Wait 1 second for timeout.
+    	s.setSoTimeout(3000);
+
+    	s.send(p);
+    	s.close();
+    }
+    
     public void updatePlayer1(View v)
     {
 		Intent intent = new Intent(this, PlayerEditActivity.class);
