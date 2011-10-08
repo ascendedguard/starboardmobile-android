@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PlayerEditActivity extends Activity {
 
@@ -233,9 +234,22 @@ public class PlayerEditActivity extends Activity {
         return value;
     }
     
-    public void updatePlayer(View v) throws IOException {
+    public void updatePlayer(View v) {
+    	int score;
+    	try
+    	{
+    		score = Integer.parseInt(txtScore.getText().toString());
+    	}
+    	catch (NumberFormatException ex)
+    	{
+    		Toast toast = Toast.makeText(this, "Player score is required.", Toast.LENGTH_SHORT);
+    		toast.show();
+    		return;
+    	}
+
+    	
     	String name = txtPlayerName.getText().toString();
-    	int score = Integer.parseInt(txtScore.getText().toString());
+    	
     	int race = raceSpinner.getSelectedItemPosition();
     	int color = colorSpinner.getSelectedItemPosition();
 
@@ -321,6 +335,10 @@ public class PlayerEditActivity extends Activity {
 			s.setSoTimeout(3000);
 	    	s.send(p);
 		} catch (SocketException e) {
+			e.printStackTrace();
+			s.close();
+			return;
+		} catch (IOException e) {
 			e.printStackTrace();
 			s.close();
 			return;
