@@ -90,10 +90,8 @@ public class PlayerEditActivity extends Activity {
 			s.setSoTimeout(3000);
 	    	s.send(p);
 		} catch (SocketException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -164,7 +162,11 @@ public class PlayerEditActivity extends Activity {
     private int ParseStringCommand(byte[] buffer, int offset)
     {	
     	byte command = buffer[offset++];
-    	byte player = buffer[offset++];  	
+    	/*
+    	byte player = buffer[offset++];
+    	*/
+    	offset++;
+    	
     	int length = byteArrayToInt(buffer, offset);
     	
     	offset += 4;
@@ -180,7 +182,6 @@ public class PlayerEditActivity extends Activity {
 		try {
 			s = new String(str, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return offset;
 		}
@@ -198,7 +199,12 @@ public class PlayerEditActivity extends Activity {
     private int ParseInt32Command(byte[] buffer, int offset)
     {
     	byte cmd = buffer[offset++];
+    	
+    	/*
     	byte player = buffer[offset++];
+    	*/
+    	offset++;
+    	
     	int data = byteArrayToInt(buffer, offset);
     	String score = Integer.toString(data);
     	offset += 4;
@@ -214,7 +220,12 @@ public class PlayerEditActivity extends Activity {
     private int ParseByteCommand(byte[] buffer, int offset)
     {
     	byte cmd = buffer[offset++];
+    	
+    	/*
     	byte player = buffer[offset++];
+    	*/
+    	offset++;
+    	
     	byte data = buffer[offset++];
     	
     	if (cmd == 0x03) // UpdateRace
