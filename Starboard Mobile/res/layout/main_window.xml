@@ -5,5 +5,5 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
     <include layout="@layout/app_header" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    <include layout="@layout/maincontrols_layout" android:layout_height="match_parent" android:layout_width="match_parent"></include> 
+    <include android:layout_width="match_parent" layout="@layout/maincontrols_layout" android:layout_height="match_parent"></include> 
 </LinearLayout>

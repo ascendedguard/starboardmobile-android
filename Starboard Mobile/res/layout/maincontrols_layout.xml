@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent" android:background="#DDDDDD">
-  <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_marginTop="10px" android:layout_height="wrap_content" android:baselineAligned="true" android:layout_gravity="top">
-    <Button android:onClick="updatePlayer1" android:layout_height="wrap_content" android:text="Update Player 1" android:id="@+id/btnUpdatePlayer1" android:layout_gravity="left" android:layout_width="wrap_content" android:layout_weight="1"></Button>
-    <Button android:id="@+id/btnIncrementPlayer1" android:onClick="incrementPlayer1" android:layout_height="wrap_content" android:text="+1" android:layout_width="wrap_content" android:layout_gravity="left" android:layout_weight=".25"></Button>  
-  </LinearLayout>
-  <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:baselineAligned="true" android:layout_gravity="top">
-    <Button android:onClick="updatePlayer2" android:layout_height="wrap_content" android:text="Update Player 2" android:id="@+id/btnUpdatePlayer2" android:layout_weight="1" android:layout_gravity="left" android:layout_width="wrap_content"></Button>
-    <Button android:id="@+id/btnIncrementPlayer2" android:onClick="incrementPlayer2" android:layout_height="wrap_content" android:text="+1" android:layout_width="wrap_content" android:layout_gravity="left" android:layout_weight=".25"></Button>  
-  </LinearLayout>
-    <Button android:layout_width="match_parent" android:onClick="toggleSubbar" android:layout_height="wrap_content" android:text="Toggle Subbar" android:id="@+id/btnToggleSubbar"></Button>
-    <Button android:layout_width="match_parent" android:onClick="toggleAnnouncement" android:layout_height="wrap_content" android:text="Toggle Announcement" android:id="@+id/btnToggleAnnouncement"></Button>    
-    <Button android:layout_width="match_parent" android:onClick="swapPlayer" android:layout_height="wrap_content" android:text="Swap Players" android:id="@+id/btnSwapPlayers"></Button>
-    <Button android:layout_width="match_parent" android:onClick="showScoreboard" android:layout_height="wrap_content" android:text="Show Scoreboard" android:id="@+id/btnShowScoreboard"></Button>
-</LinearLayout>
+<ScrollView android:background="#DDDDDD" xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="match_parent" android:layout_width="match_parent">
+	<LinearLayout
+	  xmlns:android="http://schemas.android.com/apk/res/android"
+	  android:orientation="vertical"
+	  android:layout_width="match_parent"
+	  android:layout_height="match_parent">
+	  <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_marginTop="10px" android:layout_height="wrap_content" android:baselineAligned="true" android:layout_gravity="top">
+	    <Button android:onClick="updatePlayer1" android:layout_height="wrap_content" android:text="Update Player 1" android:id="@+id/btnUpdatePlayer1" android:layout_gravity="left" android:layout_width="wrap_content" android:layout_weight="1"></Button>
+	    <Button android:id="@+id/btnIncrementPlayer1" android:onClick="incrementPlayer1" android:layout_height="wrap_content" android:text="+1" android:layout_width="wrap_content" android:layout_gravity="left" android:layout_weight=".25"></Button>  
+	  </LinearLayout>
+	  <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:baselineAligned="true" android:layout_gravity="top">
+	    <Button android:onClick="updatePlayer2" android:layout_height="wrap_content" android:text="Update Player 2" android:id="@+id/btnUpdatePlayer2" android:layout_weight="1" android:layout_gravity="left" android:layout_width="wrap_content"></Button>
+	    <Button android:id="@+id/btnIncrementPlayer2" android:onClick="incrementPlayer2" android:layout_height="wrap_content" android:text="+1" android:layout_width="wrap_content" android:layout_gravity="left" android:layout_weight=".25"></Button>  
+	  </LinearLayout>
+	    <Button android:layout_width="match_parent" android:onClick="toggleSubbar" android:layout_height="wrap_content" android:text="Toggle Subbar" android:id="@+id/btnToggleSubbar"></Button>
+	    <Button android:layout_width="match_parent" android:onClick="toggleAnnouncement" android:layout_height="wrap_content" android:text="Toggle Announcement" android:id="@+id/btnToggleAnnouncement"></Button>    
+	    <Button android:layout_width="match_parent" android:onClick="swapPlayer" android:layout_height="wrap_content" android:text="Swap Players" android:id="@+id/btnSwapPlayers"></Button>
+	    <Button android:layout_width="match_parent" android:onClick="showScoreboard" android:layout_height="wrap_content" android:text="Show Scoreboard" android:id="@+id/btnShowScoreboard"></Button>
+	</LinearLayout>
+</ScrollView>

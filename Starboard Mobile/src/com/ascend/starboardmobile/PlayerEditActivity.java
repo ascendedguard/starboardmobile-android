@@ -148,8 +148,12 @@ public class PlayerEditActivity extends Activity {
     /* returns the new offset */
     private int ParseEmptyCommand(byte[] buffer, int offset)
     {
-    	byte cmd = buffer[offset++];
+    	/*
+    	byte command = buffer[offset++];
     	byte player = buffer[offset++];
+    	*/
+    	
+    	offset += 2;
     	
     	// No empty commands are expected to be parsed.
     	
@@ -158,9 +162,9 @@ public class PlayerEditActivity extends Activity {
     
     /* returns the new offset */
     private int ParseStringCommand(byte[] buffer, int offset)
-    {
-    	byte cmd = buffer[offset++];
-    	byte player = buffer[offset++];
+    {	
+    	byte command = buffer[offset++];
+    	byte player = buffer[offset++];  	
     	int length = byteArrayToInt(buffer, offset);
     	
     	offset += 4;
@@ -183,7 +187,7 @@ public class PlayerEditActivity extends Activity {
     	
     	// Handle any expected StringCommands here.
     	
-    	if (cmd == 0x01) // UpdatePlayerName
+    	if (command == 0x01) // UpdatePlayerName
     	{
     		txtPlayerName.setText(s);
     	}
