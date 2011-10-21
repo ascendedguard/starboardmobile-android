@@ -9,13 +9,12 @@ import java.net.UnknownHostException;
 import java.util.regex.Matcher;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ConnectActivity extends Activity {
    
@@ -39,50 +38,40 @@ public class ConnectActivity extends Activity {
         this.tvPort = (EditText)this.findViewById(R.id.txtPort);
     }
     
-    protected Dialog onCreateDialog(int id)
+    protected void ShowToast(int id)
     {
-    	Dialog dialog = null;
+    	String str = null;
     	
     	switch(id) {
-    	case DIALOG_INVALID_IP: {
-    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage("The provided IP Address was invalid.");
-    		
-    		dialog = builder.create();
-    		break;
-    	}
-    	case DIALOG_SUCCESS: {
-    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage("The connection was successful.");
-    		
-    		dialog = builder.create();
-    		break;
-    	}
-    	case DIALOG_FAILURE: {
-    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage("The connection failed.");
-    		
-    		dialog = builder.create();
-    		break;
-    	}
-    	case DIALOG_INVALID_PORT: {
-    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage("The port was invalid.");
-    		
-    		dialog = builder.create();
-    		break;
-    	}
-    	case DIALOG_SOCKET_FAILURE: {
-    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage("Socket failed to create.");
-    		
-    		dialog = builder.create();
-    		break;
+	    	case DIALOG_INVALID_IP: {
+	    		str = "The provided IP Address was invalid.";
+	    		break;
+	    	}
+	    	case DIALOG_SUCCESS: {
+	    		str = "The connection was successful.";
+	    		break;
+	    	}
+	    	case DIALOG_FAILURE: {
+	    		str = "The connection failed.";
+	    		break;
+	    	}
+	    	case DIALOG_INVALID_PORT: {
+	    		str = "The port was invalid.";
+	    		break;
+	    	}
+	    	case DIALOG_SOCKET_FAILURE: {
+	    		str = "Socket failed to create.";
+	    		break;
+	    	}	
     	}
     	
+    	if (str == null)
+    	{
+    		return;
     	}
     	
-    	return dialog;
+		Toast toast = Toast.makeText(this, str, Toast.LENGTH_SHORT);
+		toast.show();
     }
     
     public void attemptConnect(View v) throws IOException {
@@ -92,7 +81,7 @@ public class ConnectActivity extends Activity {
     	
     	if (matcher.matches() == false)
     	{
-    		showDialog(DIALOG_INVALID_IP);
+    		ShowToast(DIALOG_INVALID_IP);
     		return;
     	}
     	
@@ -103,7 +92,7 @@ public class ConnectActivity extends Activity {
     	}
     	catch (NumberFormatException ex)
     	{
-    		showDialog(DIALOG_INVALID_PORT);
+    		ShowToast(DIALOG_INVALID_PORT);
     		return;
     	}
     	
@@ -111,7 +100,7 @@ public class ConnectActivity extends Activity {
     	try {
 			s = new DatagramSocket(server_port);
 		} catch (SocketException e) {
-    		showDialog(DIALOG_SOCKET_FAILURE);
+			ShowToast(DIALOG_SOCKET_FAILURE);
 			e.printStackTrace();
 			return;
 		}    	
@@ -121,7 +110,7 @@ public class ConnectActivity extends Activity {
 			local = InetAddress.getByName(ipAddress);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
-    		showDialog(DIALOG_INVALID_IP);
+			ShowToast(DIALOG_INVALID_IP);
     		s.close();
     		return;
 		}
@@ -145,7 +134,7 @@ public class ConnectActivity extends Activity {
     	}
     	catch (IOException ex)
     	{
-    		showDialog(DIALOG_FAILURE);
+    		ShowToast(DIALOG_FAILURE);
     		s.close();
     		return;
     	}
@@ -163,7 +152,7 @@ public class ConnectActivity extends Activity {
     	}
     	else
     	{
-    		showDialog(DIALOG_FAILURE);
+    		ShowToast(DIALOG_FAILURE);
     	}	
     }
 }

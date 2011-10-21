@@ -5,8 +5,9 @@
 	  android:layout_width="match_parent"
 	  android:layout_height="match_parent" android:layout_gravity="top" android:layout_marginLeft="5px" android:layout_marginRight="5px" android:layout_marginTop="-5px" android:orientation="vertical">
 	    <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_height="wrap_content" android:id="@+id/txtPlayerLabel" android:text="Player 1" android:layout_gravity="center" android:layout_width="wrap_content" android:textColor="#000000" android:layout_marginTop="10px" android:layout_weight="1"></TextView>
+	    
 	    <LinearLayout android:layout_weight="1" android:orientation="vertical" android:layout_height="wrap_content" android:layout_gravity="top" android:layout_width="match_parent">
-	    	<LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="match_parent" android:baselineAligned="true">
+	    	<LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="match_parent">
 			    <TextView android:textColor="#000000" android:textAppearance="?android:attr/textAppearanceSmall" android:layout_height="wrap_content" android:text="Player Name" android:layout_width="wrap_content" android:layout_gravity="left" android:layout_weight="1" android:width="0dp"></TextView>	    	
 			    <TextView android:textColor="#000000" android:textAppearance="?android:attr/textAppearanceSmall" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Race" android:layout_weight="1" android:width="0dp"></TextView>
 	    	</LinearLayout>
@@ -21,9 +22,8 @@
 			    <TextView android:textColor="#000000" android:textAppearance="?android:attr/textAppearanceSmall" android:layout_height="wrap_content" android:text="Score" android:layout_width="wrap_content" android:layout_gravity="right" android:layout_weight="1" android:width="0dp"></TextView>
 			    <TextView android:textColor="#000000" android:textAppearance="?android:attr/textAppearanceSmall" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Color" android:layout_weight="1" android:width="0dp"></TextView>
 			</LinearLayout>
-			<LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_weight="1">
+			<LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
 			    <EditText android:id="@+id/txtScore" android:inputType="number" android:width="0dp" android:layout_weight="1" android:layout_width="match_parent" android:layout_height="match_parent"></EditText>	    
-			
 			    <Spinner android:id="@+id/spinnerColor" android:layout_width="match_parent" android:layout_weight="1" android:layout_height="match_parent"></Spinner>
 			</LinearLayout>
 	    </LinearLayout>
